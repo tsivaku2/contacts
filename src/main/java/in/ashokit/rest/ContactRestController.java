@@ -17,42 +17,36 @@ import in.ashokit.service.ContactService;
 
 @RestController
 public class ContactRestController {
-	
+
 	@Autowired
 	private ContactService service;
-	
+
 	@PostMapping("/contact")
-	public ResponseEntity<String> contact (@RequestBody Contact contact){
+	public ResponseEntity<String> contact(@RequestBody Contact contact) {
 		String status = service.upsert(contact);
-		return  new ResponseEntity<String> (status, HttpStatus.CREATED);
-		
+		return new ResponseEntity<String>(status, HttpStatus.CREATED);
+
 	}
-	
+
 	@GetMapping("/contacts")
 	public ResponseEntity<List<Contact>> getAllContacts() {
-		List<Contact> allContacts = service.getAllContacts(); 
-		return new ResponseEntity<>(allContacts,HttpStatus.OK);
-		
+		List<Contact> allContacts = service.getAllContacts();
+		return new ResponseEntity<>(allContacts, HttpStatus.OK);
+
 	}
-	
-	
-	@GetMapping("/contact/{cid}")	
-	public ResponseEntity<Contact> getContact(@PathVariable int cid){
+
+	@GetMapping("/contact/{cid}")
+	public ResponseEntity<Contact> getContact(@PathVariable int cid) {
 		Contact contact = service.getContact(cid);
-		return new ResponseEntity<>(contact,HttpStatus.OK);
-		
+		return new ResponseEntity<>(contact, HttpStatus.OK);
+
 	}
-	 
+
 	@DeleteMapping("/contact/{cid}")
-	public ResponseEntity<String> deleteContact(@PathVariable int cid){
+	public ResponseEntity<String> deleteContact(@PathVariable int cid) {
 		String deleteContact = service.deleteContact(cid);
-		return new ResponseEntity<>(deleteContact,HttpStatus.OK);
-		
+		return new ResponseEntity<>(deleteContact, HttpStatus.OK);
+
 	}
-	
-
-	
-
-	
 
 }
